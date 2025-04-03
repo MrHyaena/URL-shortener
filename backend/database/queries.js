@@ -16,10 +16,10 @@ async function getOneUrl(parameter, value) {
   return rows;
 }
 
-async function createUrl(urlLong, urlShort, userId) {
+async function createUrl(urlLong, urlShort, path) {
   await pool.query(
-    "INSERT INTO urls (urlLong, urlShort, userId) VALUES ($1, $2, $3)",
-    [urlLong, urlShort, userId]
+    "INSERT INTO urls (urlLong, urlShort, path) VALUES ($1, $2, $3)",
+    [urlLong, urlShort, path]
   );
 }
 

@@ -3,6 +3,7 @@
 
 //Reguirements
 require("dotenv").config();
+const crypto = require("crypto");
 const express = require("express");
 const pool = require("../database/pool");
 const {
@@ -11,6 +12,8 @@ const {
   createUrl,
   deleteUrl,
 } = require("../database/queries");
+
+const redirectURL = "http://localhost:4000/";
 
 //Creating router
 const router = express.Router();
@@ -22,16 +25,18 @@ router.get("/get/all", async (req, res) => {
   res.json(rows);
 });
 
-router.get("/get/:id", async (req, res) => {
-  const { id } = req.params;
-  const rows = await getOneUrl("id", id);
+router.get("/get/:path", async (req, res) => {
+  const { path } = req.params;
+  const rows = await getOneUrl("path", path);
   res.json(rows[0]);
 });
 
 router.post("/create", async (req, res) => {
-  const { urlLong, urlShort, path, userId } = req.body;
-  await createUrl(urlLong, urlShort, userId);
-  res.json("Create url");
+  const { urlLong } = req.body;
+  const path = crypto.randomBytes(4).toString("hex");
+  const urlShort = redirectURL + path;
+  await createUrl(urlLong, urlShort, path);
+  res.json("Create url " + urlShort);
 });
 
 router.post("/delete/:id", async (req, res) => {

@@ -8,15 +8,13 @@ console.log(argv[2]);
 const SQL = `
 CREATE TABLE IF NOT EXISTS urls (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  urlLong VARCHAR ( 255 ), urlShort VARCHAR ( 255 ), path VARCHAR ( 255 ), userId VARCHAR ( 255 )
-);
+  urlLong VARCHAR ( 255 ), urlShort VARCHAR ( 255 ), path VARCHAR ( 255 ));
 
-INSERT INTO urls (urlLong, urlShort, path, userId) 
+INSERT INTO urls (urlLong, urlShort, path) 
 VALUES
   ('www.google.com',
   'www.sh.cz/48916',
-  '48916',
-  '489445');
+  '48916');
 `;
 
 async function main() {
