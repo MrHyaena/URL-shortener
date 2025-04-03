@@ -1,10 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 
 //Routes
 const urlRouter = require("./routes/urlRoute");
 const { getOneUrl } = require("./database/queries");
 
 const app = express();
+
+//Middleware
+app.use(cors());
 
 app.use("/url", express.json(), urlRouter);
 

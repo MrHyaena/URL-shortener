@@ -33,10 +33,11 @@ router.get("/get/:path", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   const { urlLong } = req.body;
+  console.log(req.body);
   const path = crypto.randomBytes(4).toString("hex");
   const urlShort = redirectURL + path;
   await createUrl(urlLong, urlShort, path);
-  res.json("Create url " + urlShort);
+  res.json(urlShort);
 });
 
 router.post("/delete/:id", async (req, res) => {

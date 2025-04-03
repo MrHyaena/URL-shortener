@@ -5,9 +5,11 @@ const { Client } = require("pg");
 
 console.log(argv[2]);
 
+//node database/populatedb.js
+
 const SQL = `
 CREATE TABLE IF NOT EXISTS urls (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  id INTEGER PRIMARY KEY node db/populatedb.jsGENERATED ALWAYS AS IDENTITY,
   urlLong VARCHAR ( 255 ), urlShort VARCHAR ( 255 ), path VARCHAR ( 255 ));
 
 INSERT INTO urls (urlLong, urlShort, path) 
