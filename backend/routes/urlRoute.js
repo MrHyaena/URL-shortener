@@ -4,6 +4,7 @@
 //Reguirements
 require("dotenv").config();
 const express = require("express");
+const pool = require("../database/pool");
 
 //Creating router
 const router = express.Router();
@@ -11,7 +12,9 @@ const router = express.Router();
 // ------------------ ROUTES --------------------------
 
 router.get("/get/all", async (req, res) => {
-  res.json("Get all");
+  const { rows } = await pool.query("SELECT * FROM urls");
+  console.log(rows);
+  res.json(rows);
 });
 
 router.get("/get/:id", async (req, res) => {
@@ -21,6 +24,11 @@ router.get("/get/:id", async (req, res) => {
 });
 
 router.post("/create", async (req, res) => {
+  const { urlLong, urlShort, userId } = req.body;
+  await pool.query(
+    "INSERT INTO urls (urlLong, urlShort, userId) VALUES ($1, $2, $3)",
+    [urlLong, urlShort, userId]
+  );
   res.json("Create url");
 });
 
