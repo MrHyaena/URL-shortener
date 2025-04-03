@@ -28,6 +28,7 @@ router.get("/get/all", async (req, res) => {
 router.get("/get/:path", async (req, res) => {
   const { path } = req.params;
   const rows = await getOneUrl("path", path);
+  console.log(rows[0]);
   res.json(rows[0]);
 });
 
@@ -37,7 +38,7 @@ router.post("/create", async (req, res) => {
   const path = crypto.randomBytes(4).toString("hex");
   const urlShort = redirectURL + path;
   await createUrl(urlLong, urlShort, path);
-  res.json(urlShort);
+  res.json({ urlShort: urlShort, path: path });
 });
 
 router.post("/delete/:id", async (req, res) => {
